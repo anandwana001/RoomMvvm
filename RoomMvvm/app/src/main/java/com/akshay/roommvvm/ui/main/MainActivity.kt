@@ -50,9 +50,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
         viewModel.launchAddData.observe(this, Observer {
             it.getIfNotHandled()?.run {
-                val intent = Intent(applicationContext, AddActivity::class.java)
-                intent.putExtra("tag", TAG)
-                startActivity(intent)
+                startActivity(Intent(applicationContext, AddActivity::class.java))
             }
         })
     }

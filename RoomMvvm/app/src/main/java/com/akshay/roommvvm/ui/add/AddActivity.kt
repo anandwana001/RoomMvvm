@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import com.akshay.roommvvm.R
 import com.akshay.roommvvm.di.component.ActivityComponent
 import com.akshay.roommvvm.ui.base.BaseActivity
-import com.akshay.roommvvm.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_create.*
 
 /**
@@ -27,14 +26,19 @@ class AddActivity : BaseActivity<AddViewModel>() {
         activityComponent.inject(this)
 
     override fun setupView(savedInstanceState: Bundle?) {
+        val intent = getIntent()
+        intent?.let {
+            if (it.hasExtra("name"))
+                viewModel.onPrevNameChange(it.getStringExtra("name"))
 
-        val tag = intent.getStringExtra("tag")
-        if (tag != MainActivity.TAG) {
-            viewModel.onPrevNameChange(intent.getStringExtra("name"))
-            viewModel.updateUserId(intent.getLongExtra("id", 0L))
+            if (it.hasExtra("id"))
+                viewModel.updateUserId(it.getLongExtra("id", 0L))
+
             btnDelete.visibility = View.VISIBLE
-        } else {
+            btnSave.text = R.string.btn_update.toString()
+        } ?: kotlin.run {
             btnDelete.visibility = View.GONE
+            btnSave.text = R.string.btn_save.toString()
         }
 
         btnSave.setOnClickListener { viewModel.addDataToDatabase() }

@@ -92,12 +92,6 @@ abstract class BaseAdapter<T : Any, VH : BaseItemViewHolder<T, out BaseItemViewM
         holder.bind(dataList[position])
     }
 
-    fun updateList(list: List<T>) {
-        dataList.clear()
-        dataList.addAll(list)
-        notifyDataSetChanged()
-    }
-
     fun appendData(dataList: List<T>) {
         val oldCount = itemCount
         this.dataList.addAll(dataList)

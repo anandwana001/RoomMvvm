@@ -46,7 +46,6 @@ class UserItemViewHolder(parent: ViewGroup) :
                 val intent = Intent(itemView.context, AddActivity::class.java)
                 intent.putExtra("name", viewModel.name.value)
                 intent.putExtra("id", viewModel.userId.value)
-                intent.putExtra("tag", "item")
                 itemView.context.startActivity(intent)
             }
         })
