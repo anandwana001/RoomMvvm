@@ -1,7 +1,8 @@
 package com.akshay.roommvvm.di.module
 
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL
 import com.akshay.roommvvm.data.repository.UserRepository
 import com.akshay.roommvvm.ui.add.AddViewModel
 import com.akshay.roommvvm.ui.base.BaseActivity
@@ -22,7 +23,8 @@ import io.reactivex.disposables.CompositeDisposable
 class ActivityModule(private val activity: BaseActivity<*>) {
 
     @Provides
-    fun provideLinearLayoutManager(): LinearLayoutManager = LinearLayoutManager(activity)
+    fun provideStaggeredGridLayoutManager(): StaggeredGridLayoutManager =
+        StaggeredGridLayoutManager(2, VERTICAL)
 
     @Provides
     fun provideUserAdapter(): UserAdapter = UserAdapter(activity.lifecycle, ArrayList())

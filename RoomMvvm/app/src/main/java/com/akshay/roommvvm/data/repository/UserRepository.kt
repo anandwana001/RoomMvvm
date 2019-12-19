@@ -24,43 +24,43 @@ class UserRepository @Inject constructor(
                 databaseService.userDao()
                     .insertMany(
                         User(
-                            name = "Test 1",
+                            name = "Akshay Nandwana",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 2",
+                            name = "Abdul",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 3",
+                            name = "Bunty",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 4",
+                            name = "Harsh",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 5",
+                            name = "Avish Rawal",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 6",
+                            name = "Krishna",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 7",
+                            name = "Lokesh Ji",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 8",
+                            name = "Raghav",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 9",
+                            name = "Prateek",
                             dateOfBirth = Date(959684579)
                         ),
                         User(
-                            name = "Test 10",
+                            name = "Vinod",
                             dateOfBirth = Date(959684579)
                         )
                     )

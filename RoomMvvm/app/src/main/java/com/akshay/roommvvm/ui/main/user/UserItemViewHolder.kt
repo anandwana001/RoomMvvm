@@ -34,7 +34,7 @@ class UserItemViewHolder(parent: ViewGroup) :
         })
 
         viewModel.dateOfBirth.observe(this, Observer {
-            itemView.tvDateOfBirth.text = it
+            itemView.tvDateOfBirth.text = itemView.resources.getString(R.string.date_of_birth, it)
         })
 
         viewModel.userId.observe(this, Observer {

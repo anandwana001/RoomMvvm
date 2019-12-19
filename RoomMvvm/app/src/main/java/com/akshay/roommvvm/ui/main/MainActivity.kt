@@ -3,7 +3,7 @@ package com.akshay.roommvvm.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.akshay.roommvvm.R
 import com.akshay.roommvvm.di.component.ActivityComponent
 import com.akshay.roommvvm.ui.add.AddActivity
@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
     }
 
     @Inject
-    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
 
     @Inject
     lateinit var userAdapter: UserAdapter
@@ -36,7 +36,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
         }
 
         rvList.apply {
-            layoutManager = linearLayoutManager
+            layoutManager = staggeredGridLayoutManager
             adapter = userAdapter
         }
     }
