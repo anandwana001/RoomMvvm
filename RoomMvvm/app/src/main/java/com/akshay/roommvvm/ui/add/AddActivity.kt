@@ -26,19 +26,19 @@ class AddActivity : BaseActivity<AddViewModel>() {
         activityComponent.inject(this)
 
     override fun setupView(savedInstanceState: Bundle?) {
-        val intent = getIntent()
+        val intent = getIntent().extras
         intent?.let {
-            if (it.hasExtra("name"))
-                viewModel.onPrevNameChange(it.getStringExtra("name"))
+            if (it.containsKey("name"))
+                viewModel.onPrevNameChange(it.getString("name") ?: "name")
 
-            if (it.hasExtra("id"))
-                viewModel.updateUserId(it.getLongExtra("id", 0L))
+            if (it.containsKey("id"))
+                viewModel.updateUserId(it.getLong("id", 0L))
 
             btnDelete.visibility = View.VISIBLE
-            btnSave.text = R.string.btn_update.toString()
+            btnSave.text = resources.getString(R.string.btn_update)
         } ?: kotlin.run {
             btnDelete.visibility = View.GONE
-            btnSave.text = R.string.btn_save.toString()
+            btnSave.text = resources.getString(R.string.btn_save)
         }
 
         btnSave.setOnClickListener { viewModel.addDataToDatabase() }
