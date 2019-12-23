@@ -42,12 +42,10 @@ class UserItemViewHolder(parent: ViewGroup) :
         })
 
         viewModel.launchAddData.observe(this, Observer {
-            it.getIfNotHandled()?.run {
-                val intent = Intent(itemView.context, AddActivity::class.java)
-                intent.putExtra("name", viewModel.name.value)
-                intent.putExtra("id", viewModel.userId.value)
-                itemView.context.startActivity(intent)
-            }
+            val intent = Intent(itemView.context, AddActivity::class.java)
+            intent.putExtra("name", viewModel.name.value)
+            intent.putExtra("id", viewModel.userId.value)
+            itemView.context.startActivity(intent)
         })
     }
 }
