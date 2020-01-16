@@ -30,38 +30,6 @@ class UserRepository @Inject constructor(
                         User(
                             name = "Abdul",
                             dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Bunty",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Harsh",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Avish Rawal",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Krishna",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Lokesh Ji",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Raghav",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Prateek",
-                            dateOfBirth = Date(959684579)
-                        ),
-                        User(
-                            name = "Vinod",
-                            dateOfBirth = Date(959684579)
                         )
                     )
             else Single.just(0)

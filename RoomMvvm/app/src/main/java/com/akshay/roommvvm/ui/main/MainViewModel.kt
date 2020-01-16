@@ -1,6 +1,5 @@
 package com.akshay.roommvvm.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.akshay.roommvvm.data.local.db.entity.User
 import com.akshay.roommvvm.data.repository.UserRepository
@@ -26,7 +25,7 @@ class MainViewModel(
         fillDataToDatabase()
     }
 
-    private fun fillDataToDatabase() {
+    fun fillDataToDatabase() {
         compositeDisposable.addAll(
             userRepository.fillDatabase()
                 .subscribeOn(schedulerProvider.io())
@@ -56,4 +55,28 @@ class MainViewModel(
         launchAddData.postValue(Event(emptyMap()))
     }
 
+    fun addDataToDatabase(name: String) {
+        compositeDisposable.addAll(
+            userRepository.addSingleDataToDatabase(name)
+                .subscribeOn(schedulerProvider.io())
+                .subscribe(
+                    {
+                        getAllUser()
+                    },
+                    {}
+                ))
+    }
+
+    fun deleteUser(userIdField: Long) {
+        compositeDisposable.addAll(
+            userRepository.deleteUser(userIdField)
+                .subscribeOn(schedulerProvider.io())
+                .subscribe(
+                    {
+                        getAllUser()
+                    },
+                    {}
+                )
+        )
+    }
 }

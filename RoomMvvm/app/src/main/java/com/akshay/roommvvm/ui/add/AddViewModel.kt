@@ -21,7 +21,8 @@ class AddViewModel(
     val prevNameField: MutableLiveData<String> = MutableLiveData()
     val userIdField: MutableLiveData<Long> = MutableLiveData()
 
-    val launchMain: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
+    val replyBackAdded: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
+    val replyBackDeleted: MutableLiveData<Event<Map<String, String>>> = MutableLiveData()
 
     override fun onCreate() {}
 
@@ -29,45 +30,11 @@ class AddViewModel(
     fun onPrevNameChange(name: String) = prevNameField.postValue(name)
     fun updateUserId(id: Long) = userIdField.postValue(id)
 
-    fun addDataToDatabase() {
-
-        val name = nameField.value
-
-        compositeDisposable.addAll(
-            userIdField.value?.let {
-                userRepository.updateUser(it, name ?: "Update")
-                    .subscribeOn(schedulerProvider.io())
-                    .subscribe(
-                        {
-                            launchMain.postValue(Event(emptyMap()))
-                        },
-                        {}
-                    )
-            } ?: kotlin.run {
-                userRepository.addSingleDataToDatabase(name ?: "Akshay")
-                    .subscribeOn(schedulerProvider.io())
-                    .subscribe(
-                        {
-                            launchMain.postValue(Event(emptyMap()))
-                        },
-                        {}
-                    )
-            }
-        )
+    fun replyToAddDatabase() {
+        replyBackAdded.postValue(Event(emptyMap()))
     }
 
-    fun deleteUser() {
-        userIdField.value?.let {
-            compositeDisposable.addAll(
-                userRepository.deleteUser(it)
-                    .subscribeOn(schedulerProvider.io())
-                    .subscribe(
-                        {
-                            launchMain.postValue(Event(emptyMap()))
-                        },
-                        {}
-                    )
-            )
-        }
+    fun replyToDeleteDatabase() {
+        replyBackDeleted.postValue(Event(emptyMap()))
     }
 }

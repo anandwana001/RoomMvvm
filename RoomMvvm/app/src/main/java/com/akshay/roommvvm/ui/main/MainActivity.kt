@@ -16,6 +16,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     companion object {
         const val TAG = "MainActivity"
+        const val REQUEST_CODE = 101
     }
 
     @Inject
@@ -50,8 +51,37 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
         viewModel.launchAddData.observe(this, Observer {
             it.getIfNotHandled()?.run {
-                startActivity(Intent(applicationContext, AddActivity::class.java))
+                startActivityForResult(
+                    Intent(applicationContext, AddActivity::class.java),
+                    REQUEST_CODE
+                )
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_CODE -> {
+                if (resultCode == RESULT_OK) {
+                    data?.let {
+                        val reply = it.getStringExtra(AddActivity.EXTRA_REPLY)
+                        reply?.let {
+                            viewModel.addDataToDatabase(it)
+                        }
+                    }
+                }
+            }
+
+            1001 -> {
+                if (resultCode == RESULT_OK) {
+                    data?.let {
+
+                        val userId = it.getLongExtra(AddActivity.EXTRA_ID, 0L)
+                        viewModel.deleteUser(userId)
+                    }
+                }
+            }
+        }
     }
 }

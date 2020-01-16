@@ -1,5 +1,6 @@
 package com.akshay.roommvvm.ui.add
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +19,8 @@ class AddActivity : BaseActivity<AddViewModel>() {
 
     companion object {
         const val TAG = "AddActivity"
+        const val EXTRA_REPLY = "extra_reply"
+        const val EXTRA_ID = "extra_id"
     }
 
     override fun provideLayoutId(): Int = R.layout.activity_create
@@ -35,15 +38,15 @@ class AddActivity : BaseActivity<AddViewModel>() {
                 viewModel.updateUserId(it.getLong("id", 0L))
 
             btnDelete.visibility = View.VISIBLE
-            btnSave.text = resources.getString(R.string.btn_update)
+            btnSave.visibility = View.GONE
         } ?: kotlin.run {
             btnDelete.visibility = View.GONE
             btnSave.text = resources.getString(R.string.btn_save)
         }
 
-        btnSave.setOnClickListener { viewModel.addDataToDatabase() }
+        btnSave.setOnClickListener { viewModel.replyToAddDatabase() }
 
-        btnDelete.setOnClickListener { viewModel.deleteUser() }
+        btnDelete.setOnClickListener { viewModel.replyToDeleteDatabase() }
 
         et_name.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -63,15 +66,23 @@ class AddActivity : BaseActivity<AddViewModel>() {
                 et_name.setText(it)
         })
 
-        viewModel.launchMain.observe(this, Observer {
-            it.getIfNotHandled()?.run {
-                goBack()
-            }
-        })
-
         viewModel.prevNameField.observe(this, Observer {
             if (et_name.text.toString() != it)
                 et_name.setText(it)
+        })
+
+        viewModel.replyBackAdded.observe(this, Observer {
+            val replyIntent = Intent()
+            replyIntent.putExtra(EXTRA_REPLY, et_name.text.toString())
+            setResult(RESULT_OK, replyIntent)
+            finish()
+        })
+
+        viewModel.replyBackDeleted.observe(this, Observer {
+            val replyIntent = Intent()
+            replyIntent.putExtra(EXTRA_ID, viewModel.userIdField.value)
+            setResult(RESULT_OK, replyIntent)
+            finish()
         })
     }
 

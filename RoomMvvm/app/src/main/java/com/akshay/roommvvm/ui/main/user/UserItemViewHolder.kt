@@ -1,5 +1,6 @@
 package com.akshay.roommvvm.ui.main.user
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,8 @@ class UserItemViewHolder(parent: ViewGroup) :
             val intent = Intent(itemView.context, AddActivity::class.java)
             intent.putExtra("name", viewModel.name.value)
             intent.putExtra("id", viewModel.userId.value)
-            itemView.context.startActivity(intent)
+            val context = itemView.context as Activity
+            context.startActivityForResult(intent, 1001)
         })
     }
 }
