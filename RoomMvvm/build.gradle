@@ -55,4 +55,7 @@ ext {
 
     // Dagger
     dagger_version = '2.21'
+
+    // Coroutines
+    coroutines_version = '1.1.1'
 }

@@ -8,8 +8,6 @@ import com.akshay.roommvvm.data.local.db.entity.User
 import com.akshay.roommvvm.ui.base.BaseItemViewModel
 import com.akshay.roommvvm.utils.common.Event
 import com.akshay.roommvvm.utils.common.TimeUtils
-import com.akshay.roommvvm.utils.rx.SchedulerProvider
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
@@ -18,9 +16,7 @@ import javax.inject.Inject
  **/
 
 class UserItemViewModel @Inject constructor(
-    schedulerProvider: SchedulerProvider,
-    compositeDisposable: CompositeDisposable
-) : BaseItemViewModel<User>(schedulerProvider, compositeDisposable) {
+) : BaseItemViewModel<User>() {
 
     companion object {
         const val TAG = "UserItemViewModel"

@@ -68,8 +68,14 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
 
     // Reactive
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
+
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
 }

@@ -48,8 +48,4 @@ interface ApplicationComponent {
      */
     fun getUserRepository(): UserRepository
 
-    fun getSchedulerProvider(): SchedulerProvider
-
-    fun getCompositeDisposable(): CompositeDisposable
-
 }

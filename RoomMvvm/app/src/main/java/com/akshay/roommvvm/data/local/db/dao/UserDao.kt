@@ -9,7 +9,7 @@ import io.reactivex.Single
 interface UserDao {
 
     @Insert
-    fun insert(user: User): Single<Long>
+    suspend fun insert(user: User): Long
 
     @Update
     fun update(user: User): Single<Int>
@@ -21,20 +21,20 @@ interface UserDao {
     fun deleteAllUsers(): Single<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMany(vararg users: User): Single<List<Long>>
+    suspend fun insertMany(vararg users: User)
 
     @Query("SELECT * FROM users")
-    fun getAllUsers(): Single<List<User>>
+    fun getAllUsers(): List<User>
 
     @Query("SELECT * from users where id = :id LIMIT 1")
     fun getUserById(id: Long): Single<User>
 
     @Query("SELECT count(*) from users")
-    fun count(): Single<Int>
+    fun count(): Int
 
     @Query("UPDATE users SET name = :name WHERE id = :id")
     fun updateUser(id: Long, name: String): Single<Int>
 
     @Query("DELETE FROM users WHERE id = :id")
-    fun deleteUserById(id: Long): Single<Int>
+    suspend fun deleteUserById(id: Long): Int
 }
