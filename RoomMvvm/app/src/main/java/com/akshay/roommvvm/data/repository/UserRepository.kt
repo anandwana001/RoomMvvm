@@ -2,7 +2,8 @@ package com.akshay.roommvvm.data.repository
 
 import com.akshay.roommvvm.data.local.db.DatabaseService
 import com.akshay.roommvvm.data.local.db.entity.User
-import io.reactivex.Single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,10 +18,12 @@ class UserRepository @Inject constructor(
     private val databaseService: DatabaseService
 ) {
 
-    fun fillDatabase(): Single<Any> = databaseService.userDao()
-        .count()
-        .flatMap {
-            if (it == 0)
+    suspend fun fillDatabase() {
+        withContext(Dispatchers.Default) {
+
+            val count = databaseService.userDao().count()
+
+            if (count == 0) {
                 databaseService.userDao()
                     .insertMany(
                         User(
@@ -32,22 +35,31 @@ class UserRepository @Inject constructor(
                             dateOfBirth = Date(959684579)
                         )
                     )
-            else Single.just(0)
+            }
         }
+    }
 
-    fun returnAllUsers() = databaseService.userDao().getAllUsers()
+    suspend fun returnAllUsers(): List<User> {
+        return withContext(Dispatchers.Default) {
+            databaseService.userDao().getAllUsers()
+        }
+    }
 
-    fun deleteUser(id: Long) = databaseService.userDao().deleteUserById(id)
+    suspend fun deleteUser(id: Long) {
+        withContext(Dispatchers.Default) {
+            databaseService.userDao().deleteUserById(id)
+        }
+    }
 
-    fun addSingleDataToDatabase(name: String): Single<Long> =
-        databaseService.userDao()
-            .insert(
-                User(
-                    name = name,
-                    dateOfBirth = Date(959684579)
+    suspend fun addSingleDataToDatabase(name: String) {
+        withContext(Dispatchers.Default) {
+            databaseService.userDao()
+                .insert(
+                    User(
+                        name = name,
+                        dateOfBirth = Date(959684579)
+                    )
                 )
-            )
-
-    fun updateUser(id: Long, name: String): Single<Int> =
-        databaseService.userDao().updateUser(id, name)
+        }
+    }
 }

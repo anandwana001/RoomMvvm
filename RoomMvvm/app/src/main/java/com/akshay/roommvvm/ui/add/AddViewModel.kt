@@ -1,21 +1,14 @@
 package com.akshay.roommvvm.ui.add
 
 import androidx.lifecycle.MutableLiveData
-import com.akshay.roommvvm.data.repository.UserRepository
 import com.akshay.roommvvm.ui.base.BaseViewModel
 import com.akshay.roommvvm.utils.common.Event
-import com.akshay.roommvvm.utils.rx.SchedulerProvider
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by akshaynandwana on
  * 15, December, 2019
  **/
-class AddViewModel(
-    schedulerProvider: SchedulerProvider,
-    compositeDisposable: CompositeDisposable,
-    private val userRepository: UserRepository
-) : BaseViewModel(schedulerProvider, compositeDisposable) {
+class AddViewModel : BaseViewModel() {
 
     val nameField: MutableLiveData<String> = MutableLiveData()
     val prevNameField: MutableLiveData<String> = MutableLiveData()
