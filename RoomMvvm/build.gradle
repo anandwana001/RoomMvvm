@@ -40,7 +40,7 @@ ext {
     core_ktx = '1.1.0'
 
     // Lifecycle
-    lifecycle_version = '2.0.0'
+    lifecycle_version = '2.2.0'
 
     // Reactive
     rxjava_version = '2.2.3'
