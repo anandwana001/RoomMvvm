@@ -36,6 +36,9 @@ dependencies {
     // Android Support Library
     implementation "androidx.appcompat:appcompat:$app_compat_version"
 
+    // new activity result api
+    implementation 'androidx.activity:activity-ktx:1.2.0-alpha02'
+
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
 
